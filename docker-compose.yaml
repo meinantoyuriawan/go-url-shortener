@@ -11,6 +11,16 @@ services:
     # map the volumes to that redis has the custom conf file from this project.
     volumes: 
       - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+
+  # redis:
+  #   image: redis:6.0
+  #   restart: always
+  #   ports:
+  #     - '6379:6379'
+  #   command: redis-server --save 20 1 --loglevel warning --requirepass mypassword
+    # volumes: 
+    #   - redis:/data
+
   # redis:
   #   container_name: redis
   #   image: redis:alpine
@@ -19,12 +29,14 @@ services:
   #   command: ["redis-server", "--bind", "redis", "--port", "6379"]
   app:
     container_name: app
-    build: .
+    image : meinanto/redis-test:latest
+    build: 
+      context: .
     ports:
       - 8080:8080
     restart: on-failure
-    # depends_on:
-    #   - redis
+    depends_on:
+      - redis
     # links:
     #   - redis
   

@@ -2,7 +2,7 @@ package controller
 
 import (
 	// "encoding/json"
-	// "fmt"
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -22,11 +22,12 @@ type UrlCreationRequest struct {
 // 	if err :=
 // }
 
-// func LandingPage(w http.ResponseWriter, r *http.Request) {
-// 	w.Header().Set("Content-Type", "pkglication/json")
-// 	w.WriteHeader(http.StatusOK)
-// 	w.Write("hey")
-// }
+func LandingPage(w http.ResponseWriter, r *http.Request) {
+	// w.Header().Set("Content-Type", "pkglication/json")
+	// w.WriteHeader(http.StatusOK)
+	// w.Write([]byte("halo"))
+	fmt.Fprintf(w, "halow")
+}
 
 func CreateShortUrl(w http.ResponseWriter, r *http.Request) {
 	createShortUrl := &UrlCreationRequest{} //accessing the book struct

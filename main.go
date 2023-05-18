@@ -14,5 +14,5 @@ func main() {
 	router.RegisterShortUrlRoutes(r)
 	store.InitializeStore()
 	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe("localhost:8080", r))
+	log.Fatal(http.ListenAndServe("0.0.0.0:8080", r))
 }

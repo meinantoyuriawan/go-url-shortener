@@ -25,9 +25,12 @@ const CacheDuration = 6 * time.Hour
 // initialize store service and return a store pointer
 func InitializeStore() *StorageService {
 	redisClient := redis.NewClient(&redis.Options{
-		Addr:     "redis:6379",
+		// Addr: "host.docker.internal:6379",
+		Addr: "redis:6379",
+		// Addr: "localhost:6379",
 		Password: "mypassword",
-		DB:       0,
+		// Password: "",
+		DB: 0,
 	})
 
 	pong, err := redisClient.Ping(ctx).Result()
