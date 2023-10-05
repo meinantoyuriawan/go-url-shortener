@@ -1,0 +1,73 @@
+basePath: /
+consumes:
+    - application/json
+definitions:
+    UrlCreationRequest:
+        properties:
+            long_url:
+                description: |-
+                    name: LongUrl
+                    in: string
+                type: string
+                x-go-name: LongUrl
+            user_id:
+                description: |-
+                    name: UserId
+                    in: string
+                type: string
+                x-go-name: UserId
+        type: object
+        x-go-package: github.com/meinantoyuriawan/go-url-shortener/controller
+info:
+    description: Documentation for Product API
+    version: 1.0.0
+paths:
+    /:
+        get:
+            description: Get landing page
+            operationId: getLanding
+            responses:
+                "200":
+                    $ref: '#/responses/StringHello'
+                "401":
+                    $ref: '#/responses/Error'
+            security:
+                - apiKey:
+                    - '[]'
+            tags:
+                - UrlCreationRequest
+    /create-short-url:
+        post:
+            description: Create a short url
+            operationId: createUrl
+            responses:
+                "200":
+                    $ref: '#/responses/short'
+                    description: url
+                "401":
+                    $ref: '#/responses/Error'
+            security:
+                - apiKey:
+                    - '[]'
+            tags:
+                - UrlCreationRequest
+    /go-to/{shortUrl}:
+        get:
+            description: redirecting to desired url (short)
+            operationId: goToUrl
+            responses:
+                "200":
+                    $ref: '#/responses/Success'
+                    description: message
+                "401":
+                    $ref: '#/responses/Error'
+            security:
+                - apiKey:
+                    - '[]'
+            tags:
+                - UrlCreationRequest
+produces:
+    - application/json
+schemes:
+    - http
+swagger: "2.0"

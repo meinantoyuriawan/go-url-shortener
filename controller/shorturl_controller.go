@@ -12,9 +12,15 @@ import (
 )
 
 // Request model definition
+
+// swagger:model UrlCreationRequest
 type UrlCreationRequest struct {
+	// name: LongUrl
+	// in: string
 	LongUrl string `json:"long_url"`
-	UserId  string `json:"user_id"`
+	// name: UserId
+	// in: string
+	UserId string `json:"user_id"`
 }
 
 // func CreateShortUrl(w http.ResponseWriter, r *http.Request) {
@@ -22,6 +28,15 @@ type UrlCreationRequest struct {
 // 	if err :=
 // }
 
+// swagger:route GET / UrlCreationRequest getLanding
+// Get landing page
+//
+// security:
+// - apiKey: []
+// responses:
+//
+//	401: Error
+//	200: StringHello
 func LandingPage(w http.ResponseWriter, r *http.Request) {
 	// w.Header().Set("Content-Type", "pkglication/json")
 	// w.WriteHeader(http.StatusOK)
@@ -29,6 +44,15 @@ func LandingPage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "halow")
 }
 
+// swagger:route POST /create-short-url UrlCreationRequest createUrl
+// Create a short url
+//
+// security:
+// - apiKey: []
+// responses:
+//
+//	401: Error
+//	200: short url
 func CreateShortUrl(w http.ResponseWriter, r *http.Request) {
 	createShortUrl := &UrlCreationRequest{} //accessing the book struct
 	utils.ParseBody(r, createShortUrl)
@@ -42,6 +66,15 @@ func CreateShortUrl(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(shortUrl))
 }
 
+// swagger:route GET /go-to/{shortUrl} UrlCreationRequest goToUrl
+// redirecting to desired url (short)
+//
+// security:
+// - apiKey: []
+// responses:
+//
+//	401: Error
+//	200: Success message
 func HandleShortUrlRedirect(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	shortUrl := vars["shortUrl"]
